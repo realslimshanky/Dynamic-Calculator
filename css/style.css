@@ -1,11 +1,31 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400';
 .container{
-	max-width: 800px;
+	max-width: 1080px;
+	min-width: 320px;
+}
+#main_box{
+	margin-top: 50px;
+	padding: 0;
+}
+#how_to_block{
 	min-width: 300px;
+	max-width: 400px;
+	min-height: 330px;
+	margin:auto;
+	margin-top: 50px;
+	padding:10px;
+	border:3px dashed orange;
+}
+#how_to_block h3{
+	color:red;
+}
+#how_to_block p{
+	color:green;
 }
 #calculator{
 	margin:auto;
 	border:3px solid green;
-	box-shadow: 5px 5px 20px 0px;
+	box-shadow: 5px 5px 20px 0px green;
 	max-width: 450px;
 	min-width: 300px;
 	padding:5px;
@@ -24,6 +44,8 @@
 	border:2px dashed orange;
 	padding:7px;
 	text-align: center;
+	font-family: Roboto;
+	font-weight: 300;
 	font-size:18px;
 	overflow: scroll;
 }
@@ -36,8 +58,26 @@
 	margin-right: 10px;
 	display: inline-block;
 	margin-bottom: 10px;
-	font-size: 20px;
+	font-family: Roboto;
+	font-weight: 300;
+	font-size:15px;
+	padding: 10px;
 	color:purple;
 	font-weight: bold;
 	box-shadow: 2px 2px 5px 2px orange;
+}
+h1,h2,h3,h4,h5,h6,p{
+	font-family: Roboto;
+	font-weight: 300;
+}
+img{
+	width:40px;
+	height:40px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+#links{
+	max-width: 400px;
+	margin: auto;
+	text-align: center;
 }

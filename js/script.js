@@ -41,10 +41,57 @@ function main_action(a,key_code=false){
 	}
 	else{
 			pressed_key = String.fromCharCode(key_code);
-			if(pressed_key=='c')
-				pressed_key='C';
+			if(pressed_key=='u')
+				pressed_key='U';
 			if(pressed_key=='e')
 				pressed_key='E';
+			if(!isNaN(parseInt(pressed_key))){
+				a=document.getElementById(pressed_key);
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+			}
+			else if(pressed_key=='E'){
+				a=document.getElementById("erase");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+			}
+			else if(pressed_key=='U'){
+				a=document.getElementById("undo");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+			}
+			else if(pressed_key=='+'){
+				a=document.getElementById("plus1");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+				a=document.getElementById("plus2");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+			}
+			else if(pressed_key=='-'){
+				a=document.getElementById("minus1");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+				a=document.getElementById("minus2");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+			}
+			else if(pressed_key=='*'){
+				a=document.getElementById("star1");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+				a=document.getElementById("star2");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+			}
+			else if(pressed_key=='/'){
+				a=document.getElementById("slash1");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+				a=document.getElementById("slash2");
+				remove_box_shadow(a);
+				setTimeout(function(){set_box_shadow(a)},200);
+			}
 	}
 	function checkifno(a){
 		//alert(parseInt(pressed_key));
@@ -61,7 +108,7 @@ function main_action(a,key_code=false){
 			firstNo+=parseInt(pressed_key);
 			display.innerHTML=firstNo;
 		}
-		if(pressed_key=='C'){
+		if(pressed_key=='U'){
 			firstNo=Math.floor(firstNo/10);
 			display.innerHTML=firstNo;
 		}
@@ -77,7 +124,7 @@ function main_action(a,key_code=false){
 	}
 
 	else{
-		if(pressed_key=='C' && secondNo==0){
+		if(pressed_key=='U' && secondNo==0){
 			operator=false;
 			display.innerHTML=firstNo;
 		}
@@ -104,7 +151,7 @@ function main_action(a,key_code=false){
 			}
 			display.innerHTML=firstNo + " " + operator + " " + secondNo + " = " + result;
 		}
-		if(pressed_key=='C' && secondNo!=0){
+		if(pressed_key=='U' && secondNo!=0){
 			secondNo=Math.floor(secondNo/10);
 			if(operator=="+"){
 				result=firstNo+secondNo;
