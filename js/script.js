@@ -8,6 +8,9 @@ var operator = '';
 
 for (var i = 0; i < keys.length; i++) {
 	keys[i].addEventListener("click", function() {
+		var elem = this;
+		removeBoxShadow(elem);
+		setTimeout(function(){ setBoxShadow(elem); }, 200);
 		keyCode = this.innerHTML.charCodeAt(0);
 		mainEvent(false);
 	});
@@ -53,7 +56,6 @@ function mainEvent(keyPressed = true) {
 		keyCode = (window.event.keyCode || window.event.which);
 	
 	key = String.fromCharCode(keyCode).toUpperCase();
-	console.log(key);
 	
 	if (isNumber()) {
 		if (firstNum == 0) {
