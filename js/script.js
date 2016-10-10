@@ -179,7 +179,7 @@ function main_action(a,key_code=false){
 		}
 		
 		if (showingResult) {
-			if('+','-','*','/'].findIndex(checkifoperator)>0 && firstNo!=0){
+			if(['+','-','*','/'].findIndex(checkifoperator)>0 && firstNo!=0){
 				operator=pressed_key;
 				if (operator=="+")
 					result=firstNo+secondNo;
