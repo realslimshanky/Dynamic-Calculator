@@ -168,5 +168,23 @@ function main_action(a,key_code=false){
 			}
 			display.innerHTML=firstNo + " " + operator + " " + secondNo + " = " + result;
 		}
+		// change result by clicking on ["+", "-", "*", "/"] operators
+		if(["+", "-", "*", "/"].indexOf(pressed_key) != -1) {
+			switch(pressed_key) {
+				case "+":
+					result=firstNo+secondNo;
+					break;
+				case "-":
+					result=firstNo-secondNo;
+					break;
+				case "/":
+					if(secondNo != 0) result=firstNo/secondNo;
+					break;
+				case "*":
+					result=firstNo*secondNo;
+					break;
+			}
+			display.innerHTML=firstNo + " " + pressed_key + " " + secondNo + " = " + result;
+		}
 	}
 }
