@@ -4,6 +4,7 @@ var firstNo = 0;
 var secondNo = 0;
 var operator=false;
 var result = 0;
+var showingResult = false;
 
 function remove_box_shadow(div){
 	div.style.boxShadow="none";
@@ -107,19 +108,23 @@ function main_action(a,key_code=false){
 			firstNo*=10;
 			firstNo+=parseInt(pressed_key);
 			display.innerHTML=firstNo;
+			showingResult = false;
 		}
 		if(pressed_key=='U'){
 			firstNo=Math.floor(firstNo/10);
 			display.innerHTML=firstNo;
+			showingResult = false;
 		}
 		if(pressed_key=='E'){
 			firstNo=0;
 			display.innerHTML=firstNo;
+			showingResult = false;
 		}
 		if(['1','+','-','*','/'].findIndex(checkifoperator)>0 && firstNo!=0){
 			//alert();
 			operator=pressed_key;
 			display.innerHTML=firstNo + " " + operator;
+			showingResult = false;
 		}
 	}
 
@@ -127,12 +132,14 @@ function main_action(a,key_code=false){
 		if(pressed_key=='U' && secondNo==0){
 			operator=false;
 			display.innerHTML=firstNo;
+			showingResult = false;
 		}
 		if(pressed_key=='E'){
 			operator=false;
 			firstNo=0;
-secondNo=0;
+			secondNo=0;
 			display.innerHTML=firstNo;
+			showingResult = false;
 		}
 		if(['10','1','2','3','4','5','6','7','8','9','0'].findIndex(checkifno)>0){
 			//alert(['10','1','2','3','4','5','6','7','8','9','0'].findIndex(checkifno));
@@ -151,6 +158,7 @@ secondNo=0;
 				result=firstNo/secondNo;
 			}
 			display.innerHTML=firstNo + " " + operator + " " + secondNo + " = " + result;
+			showingResult = true;
 		}
 		if(pressed_key=='U' && secondNo!=0){
 			secondNo=Math.floor(secondNo/10);
@@ -167,6 +175,25 @@ secondNo=0;
 				result=firstNo/secondNo;
 			}
 			display.innerHTML=firstNo + " " + operator + " " + secondNo + " = " + result;
+			showingResult = true;
+		}
+		
+		if (showingResult) {
+			if('+','-','*','/'].findIndex(checkifoperator)>0 && firstNo!=0){
+				operator=pressed_key;
+				if (operator=="+")
+					result=firstNo+secondNo;
+				else if (operator=="-")
+					result=firstNo-secondNo;
+				else if (operator=="*")
+					result=firstNo*secondNo;
+				else if (operator=="/")
+					result=firstNo/secondNo;
+				else
+					alert(operator);
+		
+				display.innerHTML=firstNo + " " + operator + " " + secondNo + " " + result;
+			}
 		}
 	}
 }
