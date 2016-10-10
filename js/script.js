@@ -131,6 +131,7 @@ function main_action(a,key_code=false){
 		if(pressed_key=='E'){
 			operator=false;
 			firstNo=0;
+secondNo=0;
 			display.innerHTML=firstNo;
 		}
 		if(['10','1','2','3','4','5','6','7','8','9','0'].findIndex(checkifno)>0){
