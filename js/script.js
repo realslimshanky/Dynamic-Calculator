@@ -1,172 +1,120 @@
-var key=document.getElementsByClassName("key");
-var display=document.getElementById("display_result_inline");
-var firstNo = 0;
-var secondNo = 0;
-var operator=false;
-var result = 0;
+//set up global variables
+var keys = document.getElementsByClassName("key");
+var display = document.getElementById("display_result_inline");
+var keyCode = 0;
+var key = '';
+var firstNum = 0;
+var secondNum = 0;
+var operator = '';
 
-function remove_box_shadow(div){
-	div.style.boxShadow="none";
-}
-
-function set_box_shadow(div){
-	div.style.boxShadow="2px 2px 5px 2px orange";
-}
-
-for(var i=0; i<key.length; i++)
-{
-	//console.log(i);
-	key[i].addEventListener("click",function(){
-		var a = this;
-		main_action(a);
+for (var i = 0; i < keys.length; i++) {
+	keys[i].addEventListener("click", function() {
+		//when a button is clicked, activate shadow effect
+		var elem = this;
+		removeBoxShadow(elem);
+		setTimeout(function(){ setBoxShadow(elem); }, 200);
+		
+		//set keyCode to visible contents of the button to directly
+		//get either the ASCII code of number or the operator clicked
+		keyCode = this.innerHTML.charCodeAt(0);
+		mainEvent(false);
 	});
-
 }
 
-document.addEventListener("keypress",function(){
-	var key_code=(window.event.which || window.event.keyCode);
-	main_action(false,key_code);
+function removeBoxShadow(div){
+	div.style.boxShadow = "none";
+}
 
-});
+function setBoxShadow(div) {
+	div.style.boxShadow = "2px 2px 5px 2px orange";
+}
 
-function main_action(a,key_code=false){
+function isNumber() {
+	return ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].findIndex(function(arg) { return arg == key; }) != -1;
+}
 
-	var pressed_key=false;
-	if(key_code==false)
-	{
-		remove_box_shadow(a);
-		setTimeout(function(){set_box_shadow(a)},200);
-		pressed_key = a.innerHTML;
-		//alert(pressed_key);
-	}
-	else{
-			pressed_key = String.fromCharCode(key_code);
-			if(pressed_key=='u')
-				pressed_key='U';
-			if(pressed_key=='e')
-				pressed_key='E';
-			if(!isNaN(parseInt(pressed_key))){
-				a=document.getElementById(pressed_key);
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-			}
-			else if(pressed_key=='E'){
-				a=document.getElementById("erase");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-			}
-			else if(pressed_key=='U'){
-				a=document.getElementById("undo");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-			}
-			else if(pressed_key=='+'){
-				a=document.getElementById("plus1");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-				a=document.getElementById("plus2");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-			}
-			else if(pressed_key=='-'){
-				a=document.getElementById("minus1");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-				a=document.getElementById("minus2");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-			}
-			else if(pressed_key=='*'){
-				a=document.getElementById("star1");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-				a=document.getElementById("star2");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-			}
-			else if(pressed_key=='/'){
-				a=document.getElementById("slash1");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-				a=document.getElementById("slash2");
-				remove_box_shadow(a);
-				setTimeout(function(){set_box_shadow(a)},200);
-			}
-	}
-	function checkifno(a){
-		//alert(parseInt(pressed_key));
-		return a==parseInt(pressed_key);
-	}
-	function checkifoperator(a){
-		//alert(a);
-		return a==pressed_key;
-	}
-	if((operator==false)){
-		if(['10','1','2','3','4','5','6','7','8','9','0'].findIndex(checkifno)>0){
-			//alert(['10','1','2','3','4','5','6','7','8','9','0'].findIndex(checkifno));
-			firstNo*=10;
-			firstNo+=parseInt(pressed_key);
-			display.innerHTML=firstNo;
-		}
-		if(pressed_key=='U'){
-			firstNo=Math.floor(firstNo/10);
-			display.innerHTML=firstNo;
-		}
-		if(pressed_key=='E'){
-			firstNo=0;
-			display.innerHTML=firstNo;
-		}
-		if(['1','+','-','*','/'].findIndex(checkifoperator)>0 && firstNo!=0){
-			//alert();
-			operator=pressed_key;
-			display.innerHTML=firstNo + " " + operator;
-		}
-	}
+function isOperator() {
+	return ['+', '-', '*', '/'].findIndex(function(arg) { return arg == key; }) != -1;
+}
 
-	else{
-		if(pressed_key=='U' && secondNo==0){
-			operator=false;
-			display.innerHTML=firstNo;
+//Returns the result of the computation based on the three global variables
+function getResult() {
+	switch (operator) {
+	case '+':
+		return firstNum + secondNum;
+		break;
+	case '-':
+		return firstNum - secondNum;
+		break;
+	case '*':
+		return firstNum * secondNum;
+		break;
+	case '/':
+		return firstNum / secondNum;
+		break;
+	}
+}
+
+//Every keypress will fire mainEvent with keyPressed defaulting to true
+document.addEventListener("keypress", mainEvent);
+
+function mainEvent(keyPressed = true) {
+	//If the function is called from the document's event listener, keyCode will be set to the window event's key code
+	if (keyPressed)
+		keyCode = (window.event.keyCode || window.event.which);
+	
+	//key is derived from the key keycode. toUpperCase is called to turn 'e' to 'E' and 'u' to 'U'
+	key = String.fromCharCode(keyCode).toUpperCase();
+	
+	if (isNumber()) { //if key holds a numeric value...
+		if (firstNum == 0) {
+			//if firstNum doesn't have a value yet, set it
+			firstNum = parseInt(key);
+			display.innerHTML = firstNum;
+		} else if (operator == '' && secondNum == 0) {
+			//If firstNum has a value and operator doesn't and secondNum doesn't,
+			//the user is adding a digit to firstNum
+			firstNum *= 10;
+			firstNum += parseInt(key);
+			display.innerHTML = firstNum;
+		} else if (operator != '' && secondNum == 0) {
+			//If firstNum and operator have values but secondNum doesn't, set secondNum
+			secondNum = parseInt(key);
+			display.innerHTML = firstNum + " " + operator + " " + secondNum + " = " + getResult();
+		} else if (firstNum != 0 && operator != '' && secondNum != 0) {
+			//If all three have values, user is adding a digit to secondNum
+			secondNum *= 10;
+			secondNum += parseInt(key);
+			display.innerHTML = firstNum + " " + operator + " " + secondNum + " = " + getResult();
 		}
-		if(pressed_key=='E'){
-			operator=false;
-			firstNo=0;
-			secondNo=0;
-			display.innerHTML=firstNo;
-		}
-		if(['10','1','2','3','4','5','6','7','8','9','0'].findIndex(checkifno)>0){
-			//alert(['10','1','2','3','4','5','6','7','8','9','0'].findIndex(checkifno));
-			secondNo*=10;
-			secondNo+=parseInt(pressed_key);
-			if(operator=="+"){
-				result=firstNo+secondNo;
-			}
-			else if(operator=="-"){
-				result=firstNo-secondNo;
-			}
-			else if(operator=="*"){
-				result=firstNo*secondNo;
-			}
-			else if(operator=="/"){
-				result=firstNo/secondNo;
-			}
-			display.innerHTML=firstNo + " " + operator + " " + secondNo + " = " + result;
-		}
-		if(pressed_key=='U' && secondNo!=0){
-			secondNo=Math.floor(secondNo/10);
-			if(operator=="+"){
-				result=firstNo+secondNo;
-			}
-			else if(operator=="-"){
-				result=firstNo-secondNo;
-			}
-			else if(operator=="*"){
-				result=firstNo*secondNo;
-			}
-			else if(operator=="/"){
-				result=firstNo/secondNo;
-			}
-			display.innerHTML=firstNo + " " + operator + " " + secondNo + " = " + result;
+	} else if (isOperator()) { //if key holds an operator...
+		operator = key;
+		if (firstNum != 0 && secondNum == 0) //firstNum has value and secondNum doesn't so set the operator
+			display.innerHTML = firstNum + " " + operator;
+		else if (firstNum != 0 && operator != '' && secondNum != 0) //all three have value, switch operator and get new value
+			display.innerHTML = firstNum + " " + operator + " " + secondNum + " = " + getResult();
+	} else if (key == 'E') { //reset output
+		firstNum = 0;
+		secondNum = 0;
+		operator = '';
+		display.innerHTML = "Result";
+	} else if (key == 'U') { //user is trying to undo
+		if (firstNum != 0 && operator != '' && secondNum != 0) { //if all three have values...
+			secondNum = Math.floor(secondNum / 10); //remove digit from secondNum
+			if (secondNum == 0) //if secondNum was 1 digit, it's now 0. remove it from output
+				display.innerHTML = firstNum + " " + operator;
+			else //otherwise, get new result
+				display.innerHTML = firstNum + " " + operator + " " + secondNum + " = " + getResult();
+		} else if (firstNum != 0 && operator != '') { //if firstNum and operator have values...
+			//reset operator and remove it from output
+			operator = '';
+			display.innerHTML = firstNum;
+		} else { //if operator and secondNum both don't have values...
+			firstNum = Math.floor(firstNum/10); //remove digit from firstNum
+			if (firstNum == 0) //if it was 1 digit, it's now 0. remove it from output
+				display.innerHTML = "Result";
+			else //otherwise, display firstNum
+				display.innerHTML = firstNum;
 		}
 		// change result by clicking on ["+", "-", "*", "/"] operators
 		if(["+", "-", "*", "/"].indexOf(pressed_key) != -1) {
