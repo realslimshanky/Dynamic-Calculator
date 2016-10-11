@@ -30,11 +30,11 @@ function setBoxShadow(div) {
 }
 
 function isNumber() {
-	return ['', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].findIndex(function(arg) { return arg == key; }) > 0;
+	return ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].findIndex(function(arg) { return arg == key; }) != -1;
 }
 
 function isOperator() {
-	return ['', '+', '-', '*', '/'].findIndex(function(arg) { return arg == key; }) > 0;
+	return ['+', '-', '*', '/'].findIndex(function(arg) { return arg == key; }) != -1;
 }
 
 //Returns the result of the computation based on the three global variables
