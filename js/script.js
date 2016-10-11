@@ -46,22 +46,22 @@ function main_action(a,key_code=false){
 			if(pressed_key=='e')
 				pressed_key='E';
 			if(!isNaN(parseInt(pressed_key))){
-				a=document.getElementById(pressed_key);
+				a=$("#erase");
 				remove_box_shadow(a);
 				setTimeout(function(){set_box_shadow(a)},200);
 			}
 			else if(pressed_key=='E'){
-				a=document.getElementById("erase");
+				a = $("#erase");
 				remove_box_shadow(a);
 				setTimeout(function(){set_box_shadow(a)},200);
 			}
 			else if(pressed_key=='U'){
-				a=document.getElementById("undo");
+				a = $("#undo");
 				remove_box_shadow(a);
 				setTimeout(function(){set_box_shadow(a)},200);
 			}
 			else if(pressed_key=='+'){
-				a=document.getElementById("plus1");
+				a=$("#plus1");
 				remove_box_shadow(a);
 				setTimeout(function(){set_box_shadow(a)},200);
 				a=document.getElementById("plus2");
@@ -69,7 +69,7 @@ function main_action(a,key_code=false){
 				setTimeout(function(){set_box_shadow(a)},200);
 			}
 			else if(pressed_key=='-'){
-				a=document.getElementById("minus1");
+				a=$("#minus1");
 				remove_box_shadow(a);
 				setTimeout(function(){set_box_shadow(a)},200);
 				a=document.getElementById("minus2");
@@ -77,7 +77,7 @@ function main_action(a,key_code=false){
 				setTimeout(function(){set_box_shadow(a)},200);
 			}
 			else if(pressed_key=='*'){
-				a=document.getElementById("star1");
+				a=$("#star1");
 				remove_box_shadow(a);
 				setTimeout(function(){set_box_shadow(a)},200);
 				a=document.getElementById("star2");
@@ -85,7 +85,7 @@ function main_action(a,key_code=false){
 				setTimeout(function(){set_box_shadow(a)},200);
 			}
 			else if(pressed_key=='/'){
-				a=document.getElementById("slash1");
+				a=$("#slash1");
 				remove_box_shadow(a);
 				setTimeout(function(){set_box_shadow(a)},200);
 				a=document.getElementById("slash2");
