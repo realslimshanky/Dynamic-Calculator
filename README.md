@@ -1,4 +1,4 @@
-# Dynamic Calculator V 1.1
+# Dynamic Calculator V 1.2
 (https://realslimshanky.github.io/Dynamic-Calculator/)
 
 Simple implementation of a dynamic calculator using HTML5, CSS3 and JAVASCRIPT.

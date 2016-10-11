@@ -1,6 +1,11 @@
-# Dynamic Calculator V 1.1
+# Dynamic Calculator V 1.2
 
 ##Change Logs
+
+###V 1.2
+* Result display block is now dynamic, scroll bar has been removed for better visibility.
+* JS code has been optimised.
+* Minor bug fixes.
 
 ###V 1.1
 * User can now change operators and hence the result in the middle of the calculation.
