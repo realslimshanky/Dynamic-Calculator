@@ -9,11 +9,6 @@ var operator = '';
 
 for (var i = 0; i < keys.length; i++) {
 	keys[i].addEventListener("click", function() {
-		//when a button is clicked, activate shadow effect
-		var elem = this;
-		removeBoxShadow(elem);
-		setTimeout(function(){ setBoxShadow(elem); }, 200);
-		
 		//set keyCode to visible contents of the button to directly
 		//get either the ASCII code of number or the operator clicked
 		keyCode = this.innerHTML.charCodeAt(0);
@@ -55,16 +50,23 @@ function getResult() {
 	}
 }
 
-//Every keypress will fire mainEvent with keyPressed defaulting to true
+//every keypress will fire mainEvent with keyPressed defaulting to true
 document.addEventListener("keypress", mainEvent);
 
 function mainEvent(keyPressed = true) {
-	//If the function is called from the document's event listener, keyCode will be set to the window event's key code
+	//if the function is called from the document's event listener, set keyCode to the window event's key code
 	if (keyPressed)
 		keyCode = (window.event.keyCode || window.event.which);
 	
 	//key is derived from the key keycode. toUpperCase is called to turn 'e' to 'E' and 'u' to 'U'
 	key = String.fromCharCode(keyCode).toUpperCase();
+	
+	if (isNumber() || isOperator()) {
+		//when a valid button is clicked or pressed, activate shadow effect
+		var elem = document.getElementById(key);
+		removeBoxShadow(elem);
+		setTimeout(function(){ setBoxShadow(elem); }, 200);
+	}
 	
 	if (isNumber()) { //if key holds a numeric value...
 		if (firstNum == 0) {
