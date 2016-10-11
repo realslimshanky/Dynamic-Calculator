@@ -32,22 +32,19 @@
 }
 #display_result{
 	margin:10px;
-	height:60px;
 	border:2px solid red;
 	overflow: hidden;
 }
 #display_result_inline{
-	height:50px;
+	min-height:50px;
 	width: 95%;
-	margin:auto;
-	margin-top: 3px;
+	margin: 3px auto;
 	border:2px dashed orange;
 	padding:7px;
 	text-align: center;
 	font-family: Roboto;
 	font-weight: 300;
 	font-size:18px;
-	overflow: scroll;
 }
 .key{
 	width:50px;
