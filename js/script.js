@@ -9,11 +9,7 @@ var operator = '';
 
 for (var i = 0; i < keys.length; i++) {
 	keys[i].addEventListener("click", function() {
-		//when a button is clicked, activate shadow effect
-		var elem = this;
-		removeBoxShadow(elem);
-		setTimeout(function(){ setBoxShadow(elem); }, 200);
-		
+
 		//set keyCode to visible contents of the button to directly
 		//get either the ASCII code of number or the operator clicked
 		keyCode = this.innerHTML.charCodeAt(0);
@@ -21,13 +17,13 @@ for (var i = 0; i < keys.length; i++) {
 	});
 }
 
-function removeBoxShadow(div){
-	div.style.boxShadow = "none";
-}
-
-function setBoxShadow(div) {
-	div.style.boxShadow = "2px 2px 5px 2px orange";
-}
+//when a button is clicked, activate shadow effect
+$(".key").on('click', function(){
+    $(this).addClass("active");
+    setTimeout(function(){
+        $(".key").removeClass("active");
+    }, 100);
+})
 
 function isNumber() {
 	return ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].findIndex(function(arg) { return arg == key; }) != -1;
